@@ -28,9 +28,11 @@
         }
 
         // Insert into the database
-        public function insert()
+        public function insert($table, $params=array())
         {
-            
+            if () {
+
+            }
         }
 
         // Update into the database
@@ -49,6 +51,22 @@
         public function select()
         {
 
+        }
+
+        // Table exists / check in database
+
+        private function tableExists($table)
+        {
+            $sql = "SHOW TABLE FROM $this->db_name LIKE '$table'";
+            $tableInDb = $this->mysqli->query($sql);
+            if ($tableInDb) {
+                if ($tableInDb->num_rows == 1) {
+                    return true;
+                } else {
+                    array_push($this->result, $table. "Does not exists in this database.");
+                    return false;  
+                }
+            }
         }
 
         // close connection
