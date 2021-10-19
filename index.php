@@ -2,8 +2,38 @@
 
     include "database.php";
 
-    $obj = new database();
+    $obj = new Database();
 
-    $obj->insert('students', ['name'=>'Angel Mim', 'age'=>'18', 'city'=>'Ctg']);
+    # Insert Into
+
+    // $obj->insert('students', ['name'=>'Angel Mim', 'age'=>'18', 'city'=>'Ctg']);
+
+    // echo "Insert result is : ";
+    // print_r($obj->getResult());
+
+    # Update Data
+
+    // $obj->update('students', ['name'=>'Shamoly Akter', 'age'=>'18', 'city'=>'Gazipur'], 'id="4"');
+
+    // Other obj
+    // $obj->update('students', ['city'=>'Goa'], 'city="Gazipur"');
+
+    // echo "Update result is : ";
+    // print_r($obj->getResult());
+
+    # DELETE Method
+
+    // $obj->delete('students', 'id="5"');
+    // $obj->delete('students', 'age="17"');
+
+    // echo "Delete result is : ";
+    // print_r($obj->getResult());
+
+    #select data
+
+    // $obj->sql('SELECT * FROM students');
+
+    echo "SQL result is : ";
+    print_r($obj->getResult());
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-    class database{
+    class Database{
         private $db_host = "localhost";
         private $db_user = "root";
         private $db_pass = "";
@@ -30,21 +30,76 @@
         // Insert into the database
         public function insert($table, $params=array())
         {
-            if () {
+            if ($this->tableExists($table)) {
+                // print_r($params);
+                $tableColumns = implode(', ', array_keys($params));
+                $tableValue = implode("', '", $params);
 
+                $sql = "INSERT INTO $table ($tableColumns) VALUES ('$tableValue')";
+                if ($this->mysqli->query($sql)) {
+                    array_push($this->result, $this->mysqli->insert_id);
+                    return true;
+                } else {
+                    array_push($this->result, $this->mysqli->error);
+                    return false;
+                }
+
+            } else {
+               return false;
             }
         }
 
         // Update into the database
-        public function update()
+        public function update($table, $params=array(), $where = null)
         {
+            if ($this->tableExists($table)) {
+                // print_r($params);
+                $args = array();
+                foreach ($params as $key => $value) {
+                    $args[] = "$key = '$value'";
+                }
+                // print_r($args);
 
+                $sql = "UPDATE $table SET " . implode(', ', $args);
+
+                if ($where != null) {
+                    $sql .= " WHERE $where";
+                }
+                // echo $sql;
+
+                if ($this->mysqli->query($sql)) {
+                    array_push($this->result, $this->mysqli->affected_rows);
+                    return true;
+                } else {
+                    array_push($this->result, $this->mysqli->error);
+                    return false;
+                }
+                
+            } else {
+                return false;
+             }
         }
 
         // Delete into the database
-        public function delete()
+        public function delete($table, $where = null)
         {
-
+            if ($this->tableExists($table)) {
+                $sql = "DELETE FROM $table";
+                if ($where != null) {
+                    $sql .= " WHERE $where";
+                }
+                // echo $sql;
+                if ($this->mysqli->query($sql)) {
+                    array_push($this->result, $this->mysqli->affected_rows);
+                    return true;
+                } else {
+                    array_push($this->result, $this->mysqli->error);
+                    return false;
+                }
+            } else {
+                return false;
+            }
+            
         }
 
         // Select into the database
@@ -57,7 +112,7 @@
 
         private function tableExists($table)
         {
-            $sql = "SHOW TABLE FROM $this->db_name LIKE '$table'";
+            $sql = "SHOW TABLES FROM $this->db_name LIKE '$table'";
             $tableInDb = $this->mysqli->query($sql);
             if ($tableInDb) {
                 if ($tableInDb->num_rows == 1) {
@@ -67,6 +122,14 @@
                     return false;  
                 }
             }
+        }
+
+        // get result / show result
+        public function getResult()
+        {
+            $val = $this->result;
+            $this->result = array();
+            return $val;
         }
 
         // close connection
