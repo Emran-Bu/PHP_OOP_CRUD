@@ -29,11 +29,24 @@
     // echo "Delete result is : ";
     // print_r($obj->getResult());
 
-    #select data
+    # select data
 
-    // $obj->sql('SELECT * FROM students');
+    // $obj->sql('SELECT * FROM students where age = "20"');
 
-    echo "SQL result is : ";
+    // echo "SQL result is : ";
+
+    // echo "<pre>";
+    // print_r($obj->getResult());
+    // echo "</pre>";
+
+    #2nd rule select data
+
+    $obj->select('students', '*', null, null, 'city', '2');
+
+    echo "Select result is : ";
+
+    echo "<pre>";
     print_r($obj->getResult());
+    echo "</pre>";
 
 ?>
