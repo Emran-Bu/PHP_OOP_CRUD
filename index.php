@@ -39,7 +39,7 @@
     // print_r($obj->getResult());
     // echo "</pre>";
 
-    #2nd rule select data
+    # 2nd rule select data
 
     $obj->select('students', '*', null, null, 'city', '2');
 

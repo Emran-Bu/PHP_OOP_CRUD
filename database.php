@@ -103,6 +103,7 @@
         }
 
         // Select into the database
+        
         public function select($table, $rows = "*", $join = null, $where = null, $order = null, $limit = null)
         {
             if ($this->tableExists($table)) {
