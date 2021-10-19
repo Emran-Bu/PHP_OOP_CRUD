@@ -103,7 +103,7 @@
         }
 
         // Select into the database
-        
+
         public function select($table, $rows = "*", $join = null, $where = null, $order = null, $limit = null)
         {
             if ($this->tableExists($table)) {
@@ -118,7 +118,13 @@
                     $sql .= " ORDER BY $order";
                 }
                 if ($limit != null) {
-                    $sql .= " LIMIT 0, $limit";
+                    if (isset($_GET['page'])) {
+                        $page = $_GET['page'];
+                    } else {
+                        $page = 1;
+                    }
+                    $start = ($page - 1) * $limit;
+                    $sql .= " LIMIT $start, $limit";
                 }
 
                 // echo $sql;
