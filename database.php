@@ -143,6 +143,30 @@
             }
         }
 
+        // pagination
+        public function pagination($table, $join = null, $where = null, $limit = null)
+        {
+            if ($this->tableExists($table)) {
+                if ($limit != null) {
+                    $sql = "SELECT COUNT(*) FROM $table";
+                    if ($join != null) {
+                        $sql .= " JOIN $join";
+                    }
+                    if ($where != null) {
+                        $sql .= " WHERE $where";
+                    }
+                } else {
+                    return false;
+                }
+
+                $query = $this->mysqli->query($sql);
+                $total_records = $query->fetch_array();
+                print_r($total_records);
+            } else {
+                return false;
+            }
+        }
+
         public function sql($sql)
         {
             $query = $this->mysqli->query($sql);

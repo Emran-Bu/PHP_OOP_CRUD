@@ -41,12 +41,14 @@
 
     # 2nd rule select data
 
-    $obj->select('students', '*', null, null, 'city', '2');
+    $obj->select('students', '*', null, null, null, '2');
 
     echo "Select result is : ";
 
     echo "<pre>";
     print_r($obj->getResult());
     echo "</pre>";
+
+    $obj->pagination('students', '*', null, null,'2');
 
 ?>
