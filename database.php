@@ -127,7 +127,7 @@
                     $sql .= " LIMIT $start, $limit";
                 }
 
-                // echo $sql;
+                echo $sql . "<br>";
 
                 $query = $this->mysqli->query($sql);
                 if ($query) {
@@ -161,7 +161,27 @@
 
                 $query = $this->mysqli->query($sql);
                 $total_records = $query->fetch_array();
-                print_r($total_records);
+                // print_r($total_records);
+                $total_records = $total_records[0];
+                // echo $total_records;
+
+                $total_page = ceil($total_records / $limit);
+                $url = basename($_SERVER['PHP_SELF']);
+
+                if (isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = 1;
+                }
+                
+                $output = "<ul class='pagination'>";
+
+                if ($total_records > $limit) {
+                    # code...
+                }
+
+                $output = "</ul>";
+                
             } else {
                 return false;
             }

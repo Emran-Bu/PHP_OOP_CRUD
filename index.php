@@ -49,6 +49,6 @@
     print_r($obj->getResult());
     echo "</pre>";
 
-    $obj->pagination('students', '*', null, null,'2');
+    $obj->pagination('students', null, null,'2');
 
 ?>
