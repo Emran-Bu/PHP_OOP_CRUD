@@ -176,11 +176,29 @@
                 
                 $output = "<ul class='pagination'>";
 
-                if ($total_records > $limit) {
-                    # code...
+                if ($page > 1) {
+                    $output .= "<li><a href='$url?page=".($page - 1)."'>Prev</a></li>";
                 }
 
-                $output = "</ul>";
+                if ($total_records > $limit) {
+                    
+                    for ($i=1; $i <= $total_page ; $i++) { 
+                        if ($i == $page) {
+                            $cls = "class='active'";
+                        } else {
+                            $cls = "";
+                        }
+                        $output .= "<li><a $cls href='$url?page=$i'>$i</a></li>";
+                    }
+
+                }
+
+                if ($total_page > $page) {
+                    $output .= "<li><a href='$url?page=".($page + 1)."'>Next</a></li>";
+                }
+
+                $output .= "</ul>";
+                echo $output;
                 
             } else {
                 return false;
