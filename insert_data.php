@@ -22,7 +22,7 @@
         <label for="">City</label><br><br>
         <input type="text" name="scity" id=""><br><br>
         <label for="">Department</label><br><br>
-        <select name="department" id="">
+        <select name="sdepartment" id="">
             <?php
                 $obj->select('departments');
                 $result = $obj->getResult();
