@@ -39,9 +39,18 @@
     // print_r($obj->getResult());
     // echo "</pre>";
 
-    # 2nd rule select data
+    # 2nd rule select data 
+    # pagination
 
-    $obj->select('students', '*', null, null, null, '2');
+    $join = "departments ON students.department = departments.did";
+
+    $colName = "students.id, students.name, students.age, students.city, departments.dname";
+
+    $limit = '2';
+
+    $order = "students.id ASC";
+
+    $obj->select('students', $colName, $join, null, $order, $limit);
 
     echo "Select result is : ";
 
@@ -49,6 +58,9 @@
     print_r($obj->getResult());
     echo "</pre>";
 
-    $obj->pagination('students', null, null,'2');
+    $obj->pagination('students', $join, null, $limit);
 
 ?>
+<!-- SELECT s.id, s.name, s.age, s.city, d.dname FROM students s
+JOIN departments d
+ON students.department = departments.did -->
